@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mini Juice Shop</title>
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+</head>
+<body class="container">
+  <h1>Mini Juice Shop</h1>
+  <input id="q" class="form-control" placeholder="Search products">
+  <ul id="results"></ul>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    $('#q').on('input', function () {
+      $.getJSON('/rest/products/search', { q: this.value }, function (r) {
+        $('#results').empty()
+        r.data.forEach(function (p) { $('#results').append($('<li>').text(p.label)) })
+      })
+    })
+  </script>
+</body>
+</html>
